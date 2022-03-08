@@ -1,0 +1,10 @@
+digraph G {
+
+subgraph cluster_p{rankdir=LR; 
+ node[shape=egg,style=filled,color=khaki,fontname="Century Gothic"]; graph [fontname = "Century Gothic"];
+labelloc = "t;"label = "Pizzas";
+josue[dir=both label = "Nombre = josue"]daniel-> josue
+daniel[dir=both label = "Nombre = daniel"]daniel[dir=both label = "Nombre = daniel"]miguel-> daniel
+miguel[dir=both label = "Nombre = miguel"]miguel
+
+}}
