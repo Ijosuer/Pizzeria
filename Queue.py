@@ -1,5 +1,4 @@
-from tkinter import N
-from Node import Pizza
+from Pizza import Pizza
 from graphviz import Source
 # pizza = Pizza()
 
@@ -9,16 +8,18 @@ class Queue:
         self.first = None
         self.last = None
 
-    def Enqueue(self,name,total):
+    def Enqueue(self,name,total,time):
         if self.first is None:
-            self.first = self.last = Pizza(name,total)
+            self.first = self.last = Pizza(name,total,time)
+            self.first.time_real = time
             self.size +=1
-            print('agregado ',self.first.name)
+            print('Pizza de ',self.first.name.upper(),'en el horno 🔥', 'sale en ⌚',time,'min!')
         else:
-            self.last.next = Pizza(name,total)
+            self.last.time_real +=  time
+            self.last.next = Pizza(name,total,self.last.time_real)
             self.size +=1
-            print('agregado ',self.last.next.name)
             self.last = self.last.next
+            print('Pizza de ',self.last.name.upper(),'cocinandose 🔥', 'sale en ⌚',self.last.time_real,'min!')
 
     def Dequeue(self):
         if self.first is None:
@@ -54,14 +55,16 @@ class Queue:
         text=""
         text=""
         text+="rankdir=LR; \n node[shape=egg,style=filled,color=khaki,fontname=\"Century Gothic\"]; graph [fontname = \"Century Gothic\"];\n"
-        text+="labelloc = \"t;\"label = \"Pizzas\";\n"
+        text+="labelloc = \"t;\"label = \"🍕 Pizzas 🍕\";\n"
         
         while aux:
-            text+=""+str(aux.name)+"[dir=both label = \"Nombre = "+str(aux.name)+"\"]"
+            text+=""+str(aux.name)+"[dir=both label = \"Nombre = "+str(aux.name.upper())+"\\nCantidad = "+str(aux.total)+"\\nTiempo = "+str(aux.time_real)+"\"]"
+            if self.first == self.last:
+                break
             text+=""+str(aux.next.name)+"-> "+str(aux.name)+"\n"
             aux=aux.next
             if aux!=self.first:    
-                text+=""+str(aux.name)+"[dir=both label = \"Nombre = "+str(aux.name)+"\"]"
+                text+=""+str(aux.name)+"[dir=both label = \"Nombre = "+str(aux.name)+"\\nCantidad = "+str(aux.total)+"\\nTiempo = "+str(aux.time_real)+"\"]"
             if aux==self.last:
                 text+=""+str(aux.name)+"\n"
                 break
