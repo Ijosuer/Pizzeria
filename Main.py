@@ -9,13 +9,15 @@ def Menu():
     print('|---    1) Generar pedido                    ---|')
     print('|---    2) Enviar al horno                   ---|')
     print('|---    3) Ver pizzas pendientes             ---|')
-    print('|---    4) Datos de desarrollador            ---|')
-    print('|---    5) Salir                             ---|',Fore.LIGHTMAGENTA_EX,Style.BRIGHT)
+    print('|---    4) Sacar pizzas                      ---|')
+    print('|---    5) Datos de desarrollador            ---|')
+    print('|---    6) Salir                             ---|',Fore.LIGHTMAGENTA_EX,Style.BRIGHT)
     print('|---    **********************************   ---|')
 
 def Menu2():
     print(Style.NORMAL, Fore.LIGHTMAGENTA_EX)
-    print('|---    **********************************   ---|',end='')
+    print('|---    **********************************   ---|')
+    print('|---'+Fore.LIGHTCYAN_EX+Style.BRIGHT+'       📝  GENERADOR DE ORDENES  📝      ---|',end='')
     print(Fore.LIGHTYELLOW_EX,Style.NORMAL)
     print('|---    1) Ingresar nombre de cliente        ---|')
     print('|---    2) Seleccionar ingredientes          ---|')
@@ -36,24 +38,24 @@ def Ingredientes():
 
 queue = Queue()
 Menu()
-aux=input(Fore.GREEN+'Ingrese una opcion: ')
+aux=input(Fore.GREEN+'Ingrese una opcion: '+Fore.LIGHTWHITE_EX)
 time=0
-while(aux != '5'):
+while(aux != '6'):
     if aux == '1':
         Menu2()
-        op = input(Fore.LIGHTBLACK_EX+Style.BRIGHT+'Eliga una opcion: ')
+        op = input(Fore.GREEN+Style.BRIGHT+'Eliga una opcion: '+Fore.LIGHTWHITE_EX)
         while(op != '4'):
             if op == '1':
                 name=''
-                name = input(Fore.GREEN+Style.BRIGHT+'Ingrese nombre: ')
+                name = input(Fore.LIGHTCYAN_EX+Style.BRIGHT+'-Ingrese nombre: '+Fore.LIGHTWHITE_EX)
                 Menu2()
-                op = input(Fore.LIGHTBLACK_EX+'Eliga una opcion: ')
+                op = input(Fore.GREEN+'Eliga una opcion: '+Fore.LIGHTWHITE_EX)
             elif op == '2':
                 Ingredientes()
-                op2 = input(Fore.GREEN+'¿Cuantos ingredientes desea?: ')
+                op2 = input(Fore.LIGHTCYAN_EX+'¿Cuantos ingredientes desea?: '+Fore.LIGHTWHITE_EX)
                 time = 0
                 for i in range(int(op2)):
-                    ingredientes = input(Fore.GREEN+'Ingrese ingrediente '+str(i+1)+': '+Fore.LIGHTWHITE_EX)
+                    ingredientes = input(Fore.GREEN+'-Ingrese ingrediente '+str(i+1)+': '+Fore.LIGHTWHITE_EX)
                     if ingredientes.lower() == 'pepperoni':
                         time +=3
                     elif ingredientes.lower() == 'salchicha':
@@ -64,24 +66,26 @@ while(aux != '5'):
                         time +=5
                     elif ingredientes.lower() == 'piña':
                         time +=2
-    
+                    else:
+                        print(Fore.LIGHTRED_EX+Style.BRIGHT+'Ingrese un comando valido')
+
                 Menu2()
-                op = input(Fore.LIGHTBLACK_EX+'Eliga una opcion: ')
+                op = input(Fore.GREEN+'Eliga una opcion: '+Fore.LIGHTWHITE_EX)
             elif op == '3':
-                cant = input(Fore.GREEN+'Ingrese cantidad de pizzas: ')
+                cant = input(Fore.GREEN+'-Ingrese cantidad de pizzas: '+Fore.LIGHTWHITE_EX)
                 time = time * int(cant) 
                 Menu2()
-                op = input(Fore.LIGHTBLACK_EX+'Eliga una opcion: ')
+                op = input(Fore.LIGHTCYAN_EX+'Eliga una opcion: '+Fore.LIGHTWHITE_EX)
             else:
                 print(Fore.LIGHTRED_EX+Style.BRIGHT+'Ingrese un comando valido')
                 Menu2()
-                op = input(Fore.LIGHTBLACK_EX+'Eliga una opcion: ')
+                op = input(Fore.LIGHTCYAN_EX+'Eliga una opcion: '+Fore.LIGHTWHITE_EX)
         Menu()
-        aux=input(Fore.GREEN+'Ingrese una opcion: ')
+        aux=input(Fore.GREEN+'Ingrese una opcion: '+Fore.LIGHTWHITE_EX)
     elif aux == '2':
         queue.Enqueue(name,cant,time)
-        queue.Front()
-        queue.Rear()
+        # queue.Front()
+        # queue.Rear()
         Menu()
         aux=input(Fore.GREEN+'Ingrese una opcion: ') 
     elif aux == '3':
@@ -89,6 +93,12 @@ while(aux != '5'):
         queue.crearReporte()
         Menu()
         aux=input(Fore.GREEN+'Ingrese una opcion: ') 
+    elif aux == '4':
+        queue.Dequeue()
+        Menu()
+        aux=input(Fore.GREEN+'Ingrese una opcion: ') 
+    elif aux =='5':
+        print('MIS DATOS')
     else:
         print(Fore.GREEN,'')
         aux=input('Ingrese una opcion: ')

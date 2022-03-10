@@ -1,6 +1,6 @@
 from Pizza import Pizza
 from graphviz import Source
-# pizza = Pizza()
+from colorama import Fore, Style
 
 class Queue:
     def __init__(self):
@@ -13,22 +13,28 @@ class Queue:
             self.first = self.last = Pizza(name,total,time)
             self.first.time_real = time
             self.size +=1
-            print('Pizza de ',self.first.name.upper(),'en el horno 🔥', 'sale en ⌚',time,'min!')
+            print(Fore.LIGHTCYAN_EX+Style.BRIGHT+'Pizza de ',self.first.name.upper(),'en el horno 🔥', 'sale en ⌚',time,'min!')
         else:
-            self.last.time_real +=  time
             self.last.next = Pizza(name,total,self.last.time_real)
+            self.last.next.time_real +=  time
             self.size +=1
             self.last = self.last.next
-            print('Pizza de ',self.last.name.upper(),'cocinandose 🔥', 'sale en ⌚',self.last.time_real,'min!')
+            print(Fore.LIGHTCYAN_EX+Style.BRIGHT+'\nPizza de ',self.last.name.upper(),'en el horno 🔥', 'sale en ⌚',self.last.time_real,'min!')
 
     def Dequeue(self):
-        if self.first is None:
+        if self.last is None:
             print("Dude, it's empty here")
         else:
-            item = self.first.name
-            self.first = self.first.next
             self.size -=1
-            print('Eliminado',item) 
+            item = self.first.name
+            time = self.first.time_real
+            self.first = self.first.next
+            if self.first != self.last and self.first is not None:
+                self.first.time_real -= time
+
+            self.last.time_real -= time
+            # self.last.next = self.last
+            print(Fore.LIGHTCYAN_EX+Style.BRIGHT+'\nPizza de ',item.upper(),'está saliendo del horno!! 💯')
     
     def isEmpty(self):
         if self.first is None:
@@ -45,10 +51,10 @@ class Queue:
         print(count)
 
     def Front(self):
-        print(self.first.name)
+        print(self.first.name,self.first.time_real)
     
     def Rear(self):
-        print(self.last.name)
+        print(self.last.name,self.last.time_real)
     
     def Report(self):
         aux = self.first
@@ -56,7 +62,8 @@ class Queue:
         text=""
         text+="rankdir=LR; \n node[shape=egg,style=filled,color=khaki,fontname=\"Century Gothic\"]; graph [fontname = \"Century Gothic\"];\n"
         text+="labelloc = \"t;\"label = \"🍕 Pizzas 🍕\";\n"
-        
+        if aux is None:
+                text+='VACIO'
         while aux:
             text+=""+str(aux.name)+"[dir=both label = \"Nombre = "+str(aux.name.upper())+"\\nCantidad = "+str(aux.total)+"\\nTiempo = "+str(aux.time_real)+"\"]"
             if self.first == self.last:
