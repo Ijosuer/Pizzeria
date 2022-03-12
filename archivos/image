@@ -3,5 +3,5 @@ digraph G {
 subgraph cluster_p{rankdir=LR; 
  node[shape=egg,style=filled,color=khaki,fontname="Century Gothic"]; graph [fontname = "Century Gothic"];
 labelloc = "t;"label = "🍕 Pizzas 🍕";
-dani[dir=both label = "Nombre = DANI\nCantidad = 3\nTiempo = 0"]
+VACIO
 }}

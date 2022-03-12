@@ -60,7 +60,7 @@ while(aux != '6'):
                         time +=3
                     elif ingredientes.lower() == 'salchicha':
                         time +=4
-                    elif ingredientes.lower() == 'carne':
+                    elif ingredientes.lower() == 'c':
                         time +=10
                     elif ingredientes.lower() == 'queso':
                         time +=5
