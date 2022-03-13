@@ -17,8 +17,7 @@ def Menu():
 def Menu2():
     print(Style.NORMAL, Fore.LIGHTMAGENTA_EX)
     print('|---    **********************************   ---|')
-    print('|---'+Fore.LIGHTCYAN_EX+Style.BRIGHT+'       📝  GENERADOR DE ORDENES  📝      ---|',end='')
-    print(Fore.LIGHTYELLOW_EX,Style.NORMAL)
+    print(Fore.LIGHTYELLOW_EX+Style.NORMAL+'|---'+Fore.LIGHTCYAN_EX+Style.BRIGHT+'       📝  GENERADOR DE ORDENES  📝'+Fore.LIGHTYELLOW_EX+Style.NORMAL+'      ---|')
     print('|---    1) Ingresar nombre de cliente        ---|')
     print('|---    2) Seleccionar ingredientes          ---|')
     print('|---    3) Seleccionar cantidad de pizzas    ---|')
@@ -26,7 +25,7 @@ def Menu2():
     print('|---    **********************************   ---|')
 
 def Ingredientes():
-    print(Fore.LIGHTWHITE_EX+'\n|-----------------------------------------------|')
+    print(Fore.LIGHTWHITE_EX+Style.BRIGHT+'\n|-----------------------------------------------|')
     print(Fore.LIGHTBLUE_EX+Style.BRIGHT+'|-------[🍴 Ingredientes de la casa 🍴]---------|'+Fore.LIGHTWHITE_EX)
     print('|-----------------------------------------------|')
     print('|---     Pepperoni -----|-----   3 min       ---|')
@@ -34,6 +33,17 @@ def Ingredientes():
     print('|---     Carne     -----|-----   10 min      ---|')
     print('|---     Queso     -----|-----   5 min       ---|')
     print('|---     Piña      -----|-----   2 min       ---|')
+    print('|-----------------------------------------------|')
+
+def Datos():
+    print(Fore.LIGHTWHITE_EX+'\n|-----------------------------------------------|')
+    print(Fore.LIGHTBLUE_EX+Style.BRIGHT+'|----------------[👾 '+Fore.LIGHTCYAN_EX+'iJosuer'+Fore.LIGHTBLUE_EX+Style.BRIGHT+' 👾]----------------|'+Fore.LIGHTWHITE_EX)
+    print('|-----------------------------------------------|')
+    print('|---        UNIVERSIDAD DE SAN CARLOS        ---|')
+    print('|---         FACULTAD DE INGENIERIA          ---|')
+    print('|---                 IPC2 B-                 ---|')
+    print('|---      JOSUE ROLANDO GRAMAJO ROLDAN       ---|')
+    print('|---                202000895                ---|')
     print('|-----------------------------------------------|')
 
 queue = Queue()
@@ -60,7 +70,7 @@ while(aux != '6'):
                         time +=3
                     elif ingredientes.lower() == 'salchicha':
                         time +=4
-                    elif ingredientes.lower() == 'c':
+                    elif ingredientes.lower() == 'carne':
                         time +=10
                     elif ingredientes.lower() == 'queso':
                         time +=5
@@ -84,8 +94,6 @@ while(aux != '6'):
         aux=input(Fore.GREEN+'Ingrese una opcion: '+Fore.LIGHTWHITE_EX)
     elif aux == '2':
         queue.Enqueue(name,cant,time)
-        # queue.Front()
-        # queue.Rear()
         Menu()
         aux=input(Fore.GREEN+'Ingrese una opcion: ') 
     elif aux == '3':
@@ -98,7 +106,9 @@ while(aux != '6'):
         Menu()
         aux=input(Fore.GREEN+'Ingrese una opcion: ') 
     elif aux =='5':
-        print('MIS DATOS')
+        Datos()
+        Menu()
+        aux=input(Fore.GREEN+'Ingrese una opcion: ') 
     else:
         print(Fore.GREEN,'')
         aux=input('Ingrese una opcion: ')

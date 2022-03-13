@@ -13,7 +13,7 @@ class Queue:
             self.first = self.last = Pizza(name,total,time)
             self.first.time_real = time
             self.size +=1
-            print(Fore.LIGHTCYAN_EX+Style.BRIGHT+'Pizza de ',self.first.name.upper(),'en el horno 🔥', 'sale en ⌚',time,'min!')
+            print(Fore.LIGHTCYAN_EX+Style.BRIGHT+'\nPizza de ',self.first.name.upper(),'en el horno 🔥', 'sale en ⌚',time,'min!')
         else:
             self.last.next = Pizza(name,total,self.last.time_real)
             self.last.next.time_real +=  time
@@ -22,13 +22,14 @@ class Queue:
             print(Fore.LIGHTCYAN_EX+Style.BRIGHT+'\nPizza de ',self.last.name.upper(),'en el horno 🔥', 'sale en ⌚',self.last.time_real,'min!')
 
     def Dequeue(self):
-        item = self.first.name
-        if self.first is None:
-            print("Dude, it's empty here")
+        if self.first != None:
+            item = self.first.name
+        if self.size == 0:
+            print(Fore.LIGHTCYAN_EX+Style.BRIGHT+"\nDe momento esta tranquilo el dia 😴")
         else:
             if self.size == 1:
                 self.size -=1
-                self.last == None 
+                self.last == self.last.next 
             
             elif self.size >= 2:
                 time = self.first.time_real
@@ -74,7 +75,7 @@ class Queue:
         size = self.size
         text=""
         text=""
-        text+="rankdir=LR; \n node[shape=egg,style=filled,color=khaki,fontname=\"Century Gothic\"]; graph [fontname = \"Century Gothic\"];\n"
+        text+="rankdir=LR; \n node[shape=egg,style=filled,fontcolor=bold,color=chocolate1,fontname=\"Century Gothic\"]; graph [fontname = \"Century Gothic\"];\n"
         text+="labelloc = \"t;\"label = \"🍕 Pizzas 🍕\";\n"
         if size == 0:
                 text+='VACIO'
@@ -86,7 +87,7 @@ class Queue:
             text+=""+str(aux.next.name)+"-> "+str(aux.name)+"\n"
             aux=aux.next
             if aux!=self.first:    
-                text+=""+str(aux.name)+"[dir=both label = \"Nombre = "+str(aux.name)+"\\nCantidad = "+str(aux.total)+"\\nTiempo = "+str(aux.time_real)+"\"]"
+                text+=""+str(aux.name)+"[dir=both label = \"Nombre = "+str(aux.name.upper())+"\\nCantidad = "+str(aux.total)+"\\nTiempo = "+str(aux.time_real)+"\"]"
             if aux==self.last:
                 text+=""+str(aux.name)+"\n"
                 break
